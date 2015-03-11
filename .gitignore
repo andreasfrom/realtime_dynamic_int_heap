@@ -27,3 +27,7 @@
 *.i*86
 *.x86_64
 *.hex
+
+*.dsym
+heap_example
+heap_sort_example

@@ -1,0 +1,3 @@
+[submodule "realtime_dynamic_int_stack"]
+	path = realtime_dynamic_int_stack
+	url = https://github.com/andreasfrom/realtime_dynamic_int_stack.git

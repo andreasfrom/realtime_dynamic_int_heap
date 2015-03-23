@@ -1,7 +1,7 @@
 module CHeap where
 
-import Foreign
-import Foreign.C.Types
+import           Foreign
+import           Foreign.C.Types
 
 data Heap
 

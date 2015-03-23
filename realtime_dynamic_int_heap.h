@@ -4,10 +4,10 @@
 
 typedef Stack Heap;
 
-#define heap_alloc stack_alloc
-#define heap_free stack_free
-#define heap_size stack_size
-#define heap_is_empty stack_is_empty
+Heap * heap_alloc(void);
+void heap_free(Heap * const heap);
+size_t heap_size(Heap const * const heap);
+bool heap_is_empty(Heap const * const heap);
 
 void heap_insert(Heap * const heap, int const x);
 int heap_replace(Heap * const heap, int const x);

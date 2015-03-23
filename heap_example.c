@@ -13,7 +13,7 @@ static void heap_print(Heap const * const heap) {
 int main() {
   size_t n;
   scanf("%lu\n", &n);
-  
+
   Heap * const heap = heap_alloc();
 
   char cmd[3];
@@ -44,8 +44,8 @@ int main() {
       break;
     }
   }
-  
+
   heap_free(heap);
-  
+
   return 0;
 }

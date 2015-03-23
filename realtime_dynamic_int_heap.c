@@ -26,6 +26,22 @@ static inline size_t right(size_t ix) {
   return ix * 2 + 2;
 }
 
+inline Heap * heap_alloc(void) {
+  return stack_alloc();
+}
+
+inline void heap_free(Heap * const heap) {
+  stack_free(heap);
+}
+
+inline size_t heap_size(Heap const * const heap) {
+  return stack_size(heap);
+}
+
+inline bool heap_is_empty(Heap const * const heap) {
+  return stack_is_empty(heap);
+}
+
 static void bubble_up(Heap * const heap, size_t const ix) {
   assert(heap);
   assert(ix < heap_size(heap));
@@ -53,7 +69,7 @@ static void bubble_down(Heap * const heap, size_t const ix) {
     largest_ix = left(ix);
   else
     largest_ix = right(ix);
-  
+
   if (stack_get(heap, largest_ix) > stack_get(heap, ix)) {
     int const t = stack_get(heap, ix);
     stack_set(heap, ix, stack_get(heap, largest_ix));
@@ -73,7 +89,7 @@ static void bubble_down_fixed(int * const xs, size_t const n, size_t const ix) {
     largest_ix = left(ix);
   else
     largest_ix = right(ix);
-  
+
   if (xs[largest_ix] > xs[ix]) {
     int const t = xs[ix];
     xs[ix] = xs[largest_ix];
@@ -106,11 +122,11 @@ int heap_extract_max(Heap * const heap) {
 
   if (heap_size(heap) == 1)
     return stack_pop(heap);
-  
+
   int ret = stack_get(heap, 0);
   int last = stack_pop(heap);
   stack_set(heap, 0, last);
-  bubble_down(heap, 0);    
+  bubble_down(heap, 0);
 
   return ret;
 }
@@ -122,7 +138,7 @@ static int extract_max_fixed(int * const xs, size_t const n) {
   int ret = xs[0];
   if (n == 1) return ret;
   xs[0] = xs[n-1];
-  bubble_down_fixed(xs, n-1, 0);    
+  bubble_down_fixed(xs, n-1, 0);
 
   return ret;
 }
@@ -138,7 +154,7 @@ void heap_increase_key(Heap * const heap, size_t const ix, int const k) {
   assert(heap);
   assert(ix < heap_size(heap));
   assert(k >= 0);
-  
+
   stack_set(heap, ix, stack_get(heap, ix) + k);
   bubble_up(heap, ix);
 }
@@ -151,7 +167,7 @@ void heap_delete(Heap * const heap, size_t const ix) {
     stack_pop(heap);
     return;
   }
-  
+
   int const new = stack_pop(heap);
   int const old = stack_get(heap, ix);
   stack_set(heap, ix, new);
@@ -196,6 +212,6 @@ int * heap_degenerate_to_sorted_array(Heap * const heap, size_t * const size_out
   int * xs = stack_degenerate_to_array(heap, &n);
   *size_out = n;
   sort_heap_fixed(xs, n);
-  
+
   return xs;
 }

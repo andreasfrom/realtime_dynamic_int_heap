@@ -2,15 +2,15 @@
 
 module Main where
 
-import CHeap
-import Foreign hiding (void)
-import Foreign.C.Types
-import Test.QuickCheck
-import Test.QuickCheck.Monadic
-import Control.Monad (forM, forM_, void)
-import System.IO.Unsafe (unsafePerformIO)
-import Data.List (sort, sortBy)
-import Data.List.Ordered (isSorted, isSortedBy)
+import           CHeap
+import           Control.Monad           (forM, forM_, void)
+import           Data.List               (sort, sortBy)
+import           Data.List.Ordered       (isSorted, isSortedBy)
+import           Foreign                 hiding (void)
+import           Foreign.C.Types
+import           System.IO.Unsafe        (unsafePerformIO)
+import           Test.QuickCheck
+import           Test.QuickCheck.Monadic
 
 data HeapPtr = HeapPtr (Ptr Heap) CSize deriving Show
 
@@ -78,5 +78,6 @@ runTests = $quickCheckAll
 runDeepTests :: IO Bool
 runDeepTests = $forAllProperties $ quickCheckWithResult
                (stdArgs { maxSuccess = 1000, maxSize = 1000})
+
 main :: IO ()
 main = void runDeepTests

@@ -26,6 +26,6 @@ executable check-heap
                      , realtime_dynamic_int_stack.h
   c-sources:           realtime_dynamic_int_heap.c
                      , realtime_dynamic_int_stack/realtime_dynamic_int_stack.c
-  CC-options:          -Weverything -std=c11
+  CC-options:          -Wall -Wextra -std=c11
   include-dirs:        realtime_dynamic_int_stack
   default-language:    Haskell2010
